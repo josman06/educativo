@@ -1,0 +1,117 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "layoutgestor.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+    <title>Principal</title>
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+<!-- Nav -->
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            <form method="POST" action="{{ url_for('adminprincipal', usuario=usuario)}}" novalidate>
+                <select name="casos" >
+                    <option value="">- Selecciona un caso -</option>
+                    {% for row in casos %}
+                    <option value="{{ row[0] }}">{{ row[0] }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="small btn-default primary icon solid fa-search "></button>
+            </form>
+        </div>
+<!--        <div class="col-6 col-12-xsmall">-->
+<!--            <form method="POST" action="{{ url_for('admincasos', usuario=usuario) }}">-->
+<!--                <select name="tema" >-->
+<!--                    <option value="">- Selecciona un tema -</option>-->
+<!--                    {% for row in temas %}-->
+<!--                    <option>{{ row[0] }}</option>-->
+<!--                    {% endfor %}-->
+<!--                </select>-->
+<!--                <button type="submit" class="btn small btn-default primary icon solid fa-search "></button>-->
+<!--            </form>-->
+<!--        </div>-->
+    </div>
+    <a href="#" class="logo">
+        <span class="symbol"><img src="static/images/bd2.png" alt="" /></span><span class="title">Gestión de las tablas</span>
+    </a>
+    <nav>
+        <ul>
+            <li><a href="#menu">Inicio de seción</a></li>
+        </ul>
+    </nav>
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque menu-->
+{% block menu %}
+<!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+
+        <ul>
+            <li><a href="/">Salir</a></li>
+<!--            <li><a href="/internacional" onclick="consultainternacional()">Derecho Internacional</a></li>-->
+        </ul>
+    </nav>
+<!-- Cierre de bloque menu-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+
+<!-- Main -->
+<section>
+    <div class="table-wrapper">
+        <form method="POST" action="{{ url_for('agregar', usuario=usuario)}}" novalidate>
+        <table>
+            {% if data %}
+                <tbody>
+                {% for valor in data %}
+                    <tr>
+                        <input type="hidden" name="id"  value="{{ valor[0] }}">
+                        <label >Año:</label><input type="text" name="año" value="{{ valor[1] }}">
+                        <label>Tribunal:</label><input type="text" name="tribunal" value="{{ valor[2] }}">
+                        <label>Nombre y clasificación:</label><input type="text" name="nombre" value="{{ valor[3] }}">
+                        <label>Hechos y consideraciones</label><textarea name="hechos" align="justify" >{{ valor[4] }}</textarea>
+<!--                                   <td >-->
+<!--                                        {% for dato in vinculados %}-->
+<!--                                            {{ dato[0] + ',' }}-->
+<!--                                        {% endfor %}-->
+<!--                                    </td>-->
+                    </tr>
+                {% endfor %}
+                </tbody>
+            {% else %}
+
+                <tbody>
+                    <tr>
+                        <label >Año:</label><input name="año" type="text">
+                        <label>Tribunal:</label><input name="tribunal" type="text">
+                        <label>Nombre y clasificación:</label><input name="nombre" type="text">
+                        <label>Hechos y consideraciones:</label><textarea name="hechos" align="justify" ></textarea>
+<!--                                   <td >-->
+<!--                                        {% for dato in vinculados %}-->
+<!--                                            {{ dato[0] + ',' }}-->
+<!--                                        {% endfor %}-->
+<!--                                    </td>-->
+                    </tr>
+                </tbody>
+            {% endif %}
+        </table>
+        <button type="submit" class="small btn-default primary icon solid fa-file ">Agregar</button>
+        </form>
+    </div>
+</section>
+
+<section>
+
+    <button type="submit" class="small btn-default primary icon solid fa-trash-alt ">Eliminar</button>
+    <button type="submit" class="small btn-default primary icon solid fa-pencil-alt">Actualizar</button>
+     <button type="submit" class="small btn-default primary icon solid fa-eraser">Limpiar</button>
+</section>
+
+<!-- Cierre de bloque main-->
+{% endblock %}

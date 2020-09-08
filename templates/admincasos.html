@@ -1,0 +1,86 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "layoutgestor.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+    <title>Casos</title>
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+<!-- Nav -->
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+                <form method="POST" action="{{ url_for('admincasos', usuario=usuario) }}" novalidate>
+                    <select name="casos" >
+                        <option value="">- Selecciona un caso -</option>
+                        {% for row in casos %}
+                        <option value="{{ row[0] }}">{{ row[0] }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="small btn-default primary icon solid fa-search "></button>
+                </form>
+        </div>
+<!--        <div class="col-6 col-12-xsmall">-->
+<!--            <form method="POST" action="{{ url_for('admincasos', usuario=  usuario ) }}">-->
+<!--                <select name="tema" >-->
+<!--                    <option value="">- Selecciona un tema -</option>-->
+<!--                    {% for row in temas %}-->
+<!--                    <option>{{ row[0] }}</option>-->
+<!--                    {% endfor %}-->
+<!--                </select>-->
+<!--                <button type="submit" class="btn small btn-default primary icon solid fa-search "></button>-->
+<!--            </form>-->
+<!--        </div>-->
+    </div>
+    <a href="/sobremi" class="logo">
+        <span class="symbol"><img src="static/images/bd2.png" alt="" /></span><span class="title"></span>
+    </a>
+    <nav>
+        <ul>
+            <li><a href="#menu">Inicio de seción</a></li>
+        </ul>
+    </nav>
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque menu-->
+{% block menu %}
+<!-- Menu -->
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="/">Salir</a></li>
+<!--            <li><a href="/internacional" onclick="consultainternacional()">Derecho Internacional</a></li>-->
+        </ul>
+    </nav>
+<!-- Cierre de bloque menu-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+<section>
+    <div class="table-wrapper">
+        <h1>Gestión de la tabla casos</h1>
+        <table>
+            <tbody>
+            {% for valor in data %}
+            <tr>
+                <label >Año:</label><input type="text" value="{{ valor[0] }}">
+                <label>Tribunal:</label><input type="text" value="{{ valor[1] }}">
+                <label>Nombre y clasificación:</label><input type="text" value="{{ valor[2] }}">
+                <label>Hechos y consideraciones</label><textarea align="justify" >{{ valor[3] }}</textarea>
+<!--                                   <td >-->
+<!--                                        {% for dato in vinculados %}-->
+<!--                                            {{ dato[0] + ',' }}-->
+<!--                                        {% endfor %}-->
+<!--                                    </td>-->
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- Cierre de bloque main-->
+{% endblock %}

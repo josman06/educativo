@@ -1,0 +1,33 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/publico/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+    <title>Teoría del Derecho</title>
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+   <div id="main">
+        <div class="inner">
+            <section>
+                 <div class="table-wrapper">
+                     <h1>Teoría del Derecho</h1>
+                     <table>
+                        <tbody>
+                            {% for valor in data %}
+                            <tr>
+                                <td>{{ valor.nombre.capitalize() }}</td>
+                                <td><a href="static/teoria/{{valor.nombre +'.pdf'}}" name="{{valor.nombre}}" class="button primary fit small icon solid fa-download">Descargar</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                     </table>
+                 </div>
+            </section>
+        </div>
+    </div>
+<!-- Cierre de bloque -->
+{% endblock %}
+

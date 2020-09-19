@@ -1,0 +1,42 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/publico/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+    <title>Temas</title>
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+    <div id="main">
+        <div class="inner">
+            <section>
+                 <div class="table-wrapper">
+                     {%if casos %}
+                     <h1>Casos</h1>
+                     <table>
+                         <thead>
+						    <tr>
+                                {% if tema %}
+                                    <th>Casos vinculados al tema '{{ tema }}'</th>
+                                {% endif %}
+                            </tr>
+                         </thead>
+                        <tbody>
+                            {% for valor in casos %}
+                                <tr>
+                                    <td><a href="/casos?caso={{ valor[0] }}"  >{{ valor[1] }}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                     </table>
+                     {%endif%}
+                 </div>
+            </section>
+        </div>
+    </div>
+
+<!-- Cierre de bloque main-->
+{% endblock %}

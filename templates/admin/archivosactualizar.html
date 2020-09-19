@@ -1,0 +1,97 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/admin/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+<title>Tabla Archivos Actualizar</title>
+
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            <form method="POST" action="{{ url_for('archivosactualizar') }}" novalidate>
+                {{ cmb_materia.hidden_tag() }}
+                <!--combo formulario clase caso-->
+                {{ cmb_materia.nombre }}
+                <!--boton formulario clase caso-->
+                <sapan style="float: right">
+                    {{ cmb_materia.submit() }}
+                </sapan>
+                <div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message == '¡ Selecciona una materia !' %}
+                                    <div>
+                                        <span style="color: red;" aria-hidden="true"><h4>{{message}}</h4></span>
+                                    </div>
+                                {%endif%}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </form>
+        </div>
+    </div>
+    <a href="/administracion/archivos" class="logo">
+        <span class="symbol"><img src="/static/images/regresar.png" alt="" />
+        </span><span class="title" >Regresar</span>
+    </a>
+
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+<!-- Main -->
+<section>
+    <h3>Actualizar registro</h3>
+    {% if data %}
+        {% for valor in data %}
+            <div class="table-wrapper">
+                <form method="POST" >
+                    <table>
+                        <tbody>
+                            <tr>
+                                {{ valor.hidden_tag() }}
+                                {{ valor.nombre.label }}
+                                {{ valor.nombre() }}
+                            </tr>
+                            <tr>
+                                {{ valor.materia.label }}
+                                {{ valor.materia() }}
+                                 <div>
+                                    {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                {% if message == '¡ Selecciona una materia !' %}
+                                                    <div>
+                                                        <span style="color: red;" aria-hidden="true"><h4>{{message}}</h4></span>
+                                                    </div>
+                                                {%endif%}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                            </tr>
+                            <tr>
+                                <br>
+                                <br>
+                                <ul class="actions">
+                                     <li><button class="small btn-default primary icon solid fa-pen">Actualizar</button></li>
+                                </ul>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        {% endfor %}
+    {% endif %}
+</section>
+
+<!-- Cierre de bloque main-->
+{% endblock %}
+

@@ -1,0 +1,62 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/admin/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+    <title>Acceso</title>
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+<!-- Nav -->
+    <nav>
+        <ul>
+            <li><a href="#menu">Inicio de seción</a></li>
+        </ul>
+    </nav>
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+<div id="main">
+    <div class="inner">
+        <section>
+            <h2>Iniciar sesión</h2>
+            <form name="login" method="post" >
+                {{ datos.hidden_tag() }}
+                <div class="fields">
+                    <div class="field half">
+                        {{ datos.usuario(size=25) }}<br>
+                        {% for error in datos.usuario.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="field half">
+                        {{ datos.contraseña(size=25) }}<br>
+                        {% for error in datos.contraseña.errors %}
+                         <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <ul class="actions">
+                    <li>{{ datos.submit(class_="primary") }}</li>
+                </ul>
+                <div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                    <span style="color: red;" aria-hidden="true"><h4>{{message}}</h4></span>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+             </form>
+        </section>
+    </div>
+</div>
+<!-- Cierre de bloque main-->
+{% endblock %}

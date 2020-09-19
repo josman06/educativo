@@ -2458,7 +2458,7 @@ input, select, textarea {
 		box-shadow: inset 0 0 0 2px #585858;
 		color: #585858 !important;
 		cursor: pointer;
-		display: inline-block;
+		display: block;
 		font-size: 0.8em;
 		font-weight: 900;
 		height: 3.5em;

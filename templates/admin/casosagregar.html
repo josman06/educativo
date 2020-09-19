@@ -1,0 +1,87 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/admin/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+<title>Tabla Casos Agregar</title>
+
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+
+    <a href="/administracion/casos" class="logo">
+        <span class="symbol"><img src="/static/images/regresar.png" alt="" />
+        </span><span class="title" >Regresar</span>
+    </a>
+
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+<!-- Main -->
+<section>
+    <h3>Agregar nuevo registro</h3>
+    {% if nuevo %}
+        <div >
+            <br>
+            <form method="POST" novalidate>
+                {{ nuevo.hidden_tag() }}
+                {{ nuevo.submit() }}
+            </form>
+        </div >
+    {% endif %}
+
+    {% if agregar %}
+        <div class="table-wrapper">
+            <form method="POST" novalidate>
+                <table>
+                    <tbody>
+                        <tr>
+                            {{ agregar.hidden_tag() }}
+                            {{ agregar.año.label }}
+                            {{ agregar.año(size=4) }}<br>
+                            {% for error in agregar.año.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {{ agregar.tribunal.label }}
+                            {{ agregar.tribunal(size=30) }}<br>
+                            {% for error in agregar.tribunal.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {{ agregar.nombre.label }}
+                            {{ agregar.nombre(size=300) }}<br>
+                            {% for error in agregar.nombre.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </tr>
+                        <tr align="justify">
+                            {{ agregar.hechos.label }}
+                            {{ agregar.hechos(rows="8") }}
+                            {% for error in agregar.hechos.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <br>
+                            <br>
+                            <ul class="actions">
+                                 <li><button class="small btn-default primary icon solid fa-file">Agregar</button></li>
+                            </ul>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    {% endif %}
+</section>
+
+<!-- Cierre de bloque main-->
+{% endblock %}
+

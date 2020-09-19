@@ -1,0 +1,73 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/admin/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+<title>Tabla Archivos Agregar</title>
+
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+
+    <a href="/administracion/archivos" class="logo">
+        <span class="symbol"><img src="/static/images/regresar.png" alt="" />
+        </span><span class="title" >Regresar</span>
+    </a>
+
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+<!-- Main -->
+<section>
+    <h3>Agregar nuevo registro</h3>
+    {% if agregar %}
+        <div class="table-wrapper">
+            <form method="POST" novalidate>
+                <table>
+                    <tbody>
+                        <tr>
+                            {{ agregar.hidden_tag() }}
+                            {{ agregar.nombre.label }}
+                            {{ agregar.nombre(size=100) }}<br>
+                            {% for error in agregar.nombre.errors %}
+                                <span style="color: red;">{{ error }}</span>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {{ agregar.materia.label }}
+                            {{ agregar.materia }}<br>
+                            <div>
+                                {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            {% if message == '¡ Selecciona una materia !'%}
+                                                <div>
+                                                    <span style="color: red;" aria-hidden="true"><h4>{{message}}</h4></span>
+                                                </div>
+                                            {%endif%}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                        </tr>
+                        <tr>
+                            <br>
+                            <br>
+                            <ul class="actions">
+                                 <li><button class="small btn-default primary icon solid fa-file">Agregar</button></li>
+                            </ul>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    {% endif %}
+</section>
+
+<!-- Cierre de bloque main-->
+{% endblock %}
+

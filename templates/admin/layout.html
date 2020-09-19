@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Incluir codigo dependiendo de la página seleccionada-->
+    {% block title %}
+
+    {% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <noscript><link rel="stylesheet" href="/static/css/noscript.css" /></noscript>
+</head>
+	<body class="is-preload">
+    <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Header -->
+            <header id="header">
+
+                <div class="inner">
+                    {% block header %}
+
+                    {% endblock %}
+
+                    <!-- Nav -->
+                    <nav>
+                        <ul>
+                            <li><a href="#menu">Menu</a></li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </header>
+
+            <!-- Menu -->
+            <nav id="menu">
+                <h2>Inicio de seción</h2>
+                <ul>
+                    <li><a href="/salir">Salir</a></li>
+                </ul>
+            </nav>
+
+            <div id="main">
+                <div class="inner">
+
+                    <!-- Main -->
+                    <!-- Incluir codigo dependiendo de la página seleccionada del administrador de contenido-->
+                    {% block main %}
+
+                    {% endblock %}
+
+                </div>
+            </div>
+             <!-- Footer -->
+            <footer id="footer">
+                <div class="inner">
+                    <section>
+                        <ul class="copyright">
+                            <li>&copy; 2020 Manuel Castillo</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                            <li>Contador: <img src="http://simplehitcounter.com/hit.php?uid=16782878&f=0&b=16777215" border="0" height="18" width="83" alt="web counter"></li>
+                        </ul>
+                    </section>
+                </div>
+            </footer>
+        </div>
+		<!-- Scripts -->
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/browser.min.js"></script>
+        <script src="/static/js/breakpoints.min.js"></script>
+        <script src="/static/js/util.js"></script>
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>

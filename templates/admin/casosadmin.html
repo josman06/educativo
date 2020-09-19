@@ -1,0 +1,126 @@
+<!-- Incluir codigo en página principal (layout.html)-->
+{% extends "/admin/layout.html" %}
+
+<!-- Inicio de bloque title-->
+{% block title %}
+<title>Tabla Casos</title>
+
+<!-- Cierre de bloque title-->
+{% endblock %}
+
+<!-- Inicio de bloque header-->
+{% block header %}
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message == 'Registro agregado' or message == 'Registro eliminado' or message == 'Registro actualizado' %}
+                        <div class="alert alert-success alert-dismissable" role="alert">
+                            <button type="button" class="small close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                            <span >{{message}}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            <form method="POST" action="{{ url_for('casosadmin') }}" novalidate>
+                {{ cmb_casos.hidden_tag() }}
+                <!--combo formulario clase caso-->
+                {{ cmb_casos.caso }}
+<!--                {% for error in cmb_casos.caso.errors %}-->
+<!--                    <span style="color: red;">{{ error }}</span>-->
+<!--                {% endfor %}-->
+                <!--boton formulario clase caso-->
+                <sapan style="float: right">
+                    {{ cmb_casos.submit() }}
+                </sapan>
+                <div>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if message == '¡ Selecciona un caso !'%}
+                                    <div>
+                                        <span style="color: red;" aria-hidden="true"><h4>{{message}}</h4></span>
+                                    </div>
+                                {%endif%}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </form>
+        </div>
+    </div>
+    <a href="/administracion" class="logo">
+        <span class="symbol"><img src="/static/images/regresar.png" alt="" />
+        </span><span class="title" >Regresar</span>
+    </a>
+
+<!-- Cierre de bloque header-->
+{% endblock %}
+
+<!-- Inicio de bloque main-->
+{% block main %}
+<!-- Main -->
+<section>
+     {% if datos %}
+        <h3>Eliminar registro</h3>
+    {% else %}
+        <h3>Procesos</h3>
+    {% endif %}
+    {% if nuevo and actualizar %}
+        <div >
+            <br>
+            <form method="POST" action="{{ url_for('casosactualizar')}}" novalidate>
+                {{ actualizar.hidden_tag() }}
+                {{ actualizar.submit() }}
+            </form>
+            <form method="POST" action="{{ url_for('casosagregar')}}" novalidate>
+                {{ nuevo.hidden_tag() }}
+                {{ nuevo.submit() }}
+            </form>
+        </div >
+    {% endif %}
+
+    {% if datos %}
+        <div class="table-wrapper">
+            <form method="POST" >
+                <table>
+                    <tbody>
+                        <tr>
+                            {{ datos.hidden_tag() }}
+                            {{ datos.año.label }}
+                            {{ datos.año(disabled=True) }}
+                        </tr>
+                        <tr>
+                            {{ datos.tribunal.label }}
+                            {{ datos.tribunal(disabled=True) }}
+                        </tr>
+                        <tr>
+                            {{ datos.nombre.label }}
+                            {{ datos.nombre(disabled=True) }}
+                        </tr>
+                        <tr align="justify">
+                            {{ datos.hechos.label }}
+                            {{ datos.hechos(disabled=True, rows="8") }}
+                        </tr>
+                        <tr>
+                            <br>
+                            <ul class="actions">
+                                 <li>{{ datos.submit() }}</li>
+                            </ul>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    {% endif %}
+</section>
+
+<!-- Cierre de bloque main-->
+{% endblock %}
+
